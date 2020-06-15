@@ -12,18 +12,18 @@ class Api::V1::UsersController < ApplicationController
 			},
 			status: 200
 		end
+	end
 
-		def show
-			user = User.find_by(username: params[:username])
-			unless user
-				render json: {
-					error: "Missing or incorrect authentication credentials."
-				},
-				status: 401
-			else
-				render json: UserSerializer.new(user),
-				status: 200
-			end
+	def show
+		user = User.find_by(username: params[:username])
+		unless user
+			render json: {
+				error: "Missing or incorrect authentication credentials."
+			},
+			status: 401
+		else
+			render json: UserSerializer.new(user),
+			status: 200
 		end
 	end
 

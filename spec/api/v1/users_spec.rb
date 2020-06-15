@@ -15,7 +15,6 @@ RSpec.describe "Users" do
 	end
 
 	it "can login to an existing user account" do
-		
 		get "/api/v1/auth?username=#{@phil.username}&password=#{@phil.password}"
 		expect(response).to be_successful
 		parsed = JSON.parse(response.body)
