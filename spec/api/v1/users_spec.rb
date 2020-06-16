@@ -21,7 +21,7 @@ RSpec.describe "Users" do
 			password: @password,
 			password_confirmation: @password
 		)
-		get "/api/v1/auth?username=#{@phil.username}&password=#{@phil.password}"
+		get "/api/v1/auth?email=#{@phil.email}&password=#{@phil.password}"
 		expect(response).to be_successful
 		
 		parsed = JSON.parse(response.body)
