@@ -92,6 +92,8 @@ GEM
       method_source (~> 1.0)
     puma (3.12.6)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.3)
@@ -177,6 +179,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
+  rack-cors
   rails (~> 5.2.4, >= 5.2.4.3)
   rspec-rails
   shoulda-matchers
