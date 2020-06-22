@@ -3,9 +3,7 @@ class Api::V1::UsersController < ApplicationController
 		user = User.create(user_params)
 		user.save
 		if user.save
-			render json: {
-				success: "User successfully created!"
-			},
+			render json: UserSerializer.new(user),
 			status: 200
 		else
 			render json: {
@@ -15,9 +13,9 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
-	def show
+	def index
 		user = User.find_by(email: params[:email])
-		if user
+		if user && user.authenticate(params[:password])
 			render json: UserSerializer.new(user),
 			status: 200
 		else
@@ -31,6 +29,6 @@ class Api::V1::UsersController < ApplicationController
 	private
 
 	def user_params
-		params.permit(:username, :email, :password, :password_confirmation)
+		params.permit(:username, :email, :password)
 	end
 end
