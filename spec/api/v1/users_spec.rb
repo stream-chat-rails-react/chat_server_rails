@@ -8,7 +8,7 @@ RSpec.describe "Users" do
 	end
 	
 	it "can create a new user account" do
-		post "/api/v1/register?username=#{@username}&email=#{@email}&password=#{@password}&password_confirmation=#{@password}"
+		post "/api/v1/register?username=#{@username}&email=#{@email}&password=#{@password}"
 		expect(response).to be_successful
 		
 		expect(User.count).to eq(1)
