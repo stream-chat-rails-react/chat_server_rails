@@ -6,7 +6,6 @@ class User < ApplicationRecord
 	has_secure_password
 
 	def chat_token
-		uuid = self.id.to_s
 		client = StreamChat::Client.new(api_key = ENV["STREAM_API_KEY"], api_secret = ENV["STREAM_API_SECRET"])
 		token = client.create_token(self.username)
 		client.update_user({
