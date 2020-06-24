@@ -16,19 +16,33 @@ class Api::V1::UsersController < ApplicationController
 	def index
 		user = User.find_by(email: params[:email])
 		if user && user.authenticate(params[:password])
-			render json: UserSerializer.new(user),
+			render json: {
+				"id": "#{user.id}",
+				"email": "#{user.email}",
+				"token": user.chat_token
+			},
 			status: 200
 		else
-			render json: {
-				error: "Missing or incorrect authentication credentials."
-			},
-			status: 401
+			user = User.create(user_params)
+			if user.save
+				render json: {
+					"id": "#{user.id}",
+					"email": "#{user.email}",
+					"token": user.chat_token
+				},
+				status: 200
+			else
+				render json: {
+					error: "No dice..."
+				},
+				status: 404
+			end
 		end
 	end
 
 	private
 
 	def user_params
-		params.permit(:username, :email, :password)
+		params.permit(:email, :password)
 	end
 end
