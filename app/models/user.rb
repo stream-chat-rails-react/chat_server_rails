@@ -2,7 +2,6 @@ require 'stream-chat'
 
 class User < ApplicationRecord
 	validates :username, uniqueness: true
-	validates :email, uniqueness: true
 	validates_presence_of :username, :email, :password_digest
 	has_secure_password
 
@@ -11,14 +10,14 @@ class User < ApplicationRecord
 		token = client.create_token(self.username)
 		client.update_user({
 			id: self.username,
-			name: self.username
+			username: self.username
 		})
-		chan = client.channel("messaging", channel_id: "stream-chat-#{self.username}")
+		chan = client.channel("messaging", channel_id: "Tutorial")
 		chan.create("admin")
-		chan.add_members(["admin", self.username])
+		chan.add_members([self.username])
 		token
 	rescue StandardError => e
 		p e
-		"User token saved."
+		"Token NOT saved."
 	end
 end
