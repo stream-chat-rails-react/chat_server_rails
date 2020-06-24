@@ -37,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
 			user.save
 			if user.save
 				render json: {
-					"id": user.id.to_s,
+					"id": user.username,
 					"username": user.username,
 					"token": user.chat_token
 				},
