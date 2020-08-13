@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Users" do
 	before :each do
-		@username = "philjdelong"
+		@username = "sampleuser"
 		@email = "sample@email.com"
 		@password = "password"
 	end
@@ -32,5 +32,17 @@ RSpec.describe "Users" do
 		}
 
 		expect(parsed).to eq(user_data)
+	end
+
+	it "can delete an account" do
+		@phil = User.create(
+			username: @username,
+			email: @email,
+			password: @password,
+			password_confirmation: @password
+		)
+
+		expect(@phil).to_not eq(nil)
+		binding.pry
 	end
 end
