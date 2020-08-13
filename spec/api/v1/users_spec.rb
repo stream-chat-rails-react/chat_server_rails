@@ -8,7 +8,7 @@ RSpec.describe "Users" do
 	end
 	
 	it "can create a new user account" do
-		post "/api/v1/register?username=#{@username}&email=#{@email}&password=#{@password}&password_confirmation=#{@password}"
+		post "/api/v1/auth?username=#{@username}&email=#{@email}&password=#{@password}&password_confirmation=#{@password}"
 		expect(response).to be_successful
 		
 		expect(User.count).to eq(1)
@@ -21,16 +21,16 @@ RSpec.describe "Users" do
 			password: @password,
 			password_confirmation: @password
 		)
-		post "/api/v1/login?email=#{@phil.email}&password=#{@phil.password}"
+		post "/api/v1/auth?username=#{@phil.username}&password=#{@phil.password}"
 		expect(response).to be_successful
 		
 		parsed = JSON.parse(response.body)
 		user_data = {
+			"id" => @phil.username,
 			"username" => @phil.username,
-			"email" => @phil.email,
-			"chat_token" => @phil.chat_token
+			"token" => @phil.chat_token
 		}
 
-		expect(parsed["data"]["attributes"]).to eq(user_data)
+		expect(parsed).to eq(user_data)
 	end
 end
