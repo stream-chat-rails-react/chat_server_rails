@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Users" do
 	before :each do
-		@username = "sampleuser"
-		@email = "sample@email.com"
+		@username = "username"
+		@email = "email"
 		@password = "password"
 	end
 	
@@ -16,8 +16,8 @@ RSpec.describe "Users" do
 	
 	it "can login to an existing user account" do
 		@phil = User.create(
-			username: @username,
-			email: @email,
+			username: "phil",
+			email: "email",
 			password: @password,
 			password_confirmation: @password
 		)
@@ -42,7 +42,13 @@ RSpec.describe "Users" do
 			password_confirmation: @password
 		)
 
-		expect(@phil).to_not eq(nil)
-		binding.pry
+		@phil.chat_token
 	end
 end
+
+
+response = @client.delete_user(
+	'user_id', 
+	mark_messages_deleted: true,
+	hard_delete: true
+)

@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.1'
 
 gem 'fast_jsonapi'
-gem 'stream-chat-ruby'
+gem 'stream-chat-ruby', '~> 1.1', '>= 1.1.3'
 gem 'figaro'
 gem 'rack-cors'
 
